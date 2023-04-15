@@ -1,0 +1,309 @@
+﻿# "Greetings/Welcome" script:
+python /home/asantos/.greeting.py
+####################################
+##############
+# Environment
+##############
+## Paths:
+setenv APPSTARTER_DEV_ROOT "/images/personal/dev/modules"
+setenv CSMM_DEV_ROOT "/images/personal/dev"
+setenv CSMM_WORKSPACE_ROOT '/images/personal/dev/workspace'
+setenv SHOW 'RND'
+
+
+## GIT:
+setenv GIT_BRANCH_CMD "sh -c 'git branch --no-color 2> /dev/null' | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'"
+
+
+##################
+# Source scripts
+##################
+source ~/.git-completion.tcsh
+
+
+####################################
+# Custom Prompt
+####################################
+# Colors!
+## Default color:
+set        end="%{\033[0m%}"
+## Default Bold color:
+set       bold="%{\033[1m%}"
+## foreground normal font (color palette 1 to 8):
+set      black="%{\033[30m%}"
+set        red="%{\033[31m%}"
+set      green="%{\033[32m%}"
+set     yellow="%{\033[33m%}"
+set       blue="%{\033[34m%}"
+set    magenta="%{\033[35m%}"
+set       cyan="%{\033[36m%}"
+set      white="%{\033[37m%}"
+## foreground bold font (color pallete 9 to 16):
+set     blackB="%{\033[1;30m%}"
+set       redB="%{\033[1;31m%}"
+set     greenB="%{\033[1;32m%}"
+set    yellowB="%{\033[1;33m%}"
+set      blueB="%{\033[1;34m%}"
+set   magentaB="%{\033[1;35m%}"
+set      cyanB="%{\033[1;36m%}"
+set     whiteB="%{\033[1;37m%}"
+## foreground italic font:
+set     blackI="%{\033[3;30m%}"
+set       redI="%{\033[3;31m%}"
+set     greenI="%{\033[3;32m%}"
+set    yellowI="%{\033[3;33m%}"
+set      blueI="%{\033[3;34m%}"
+set   magentaI="%{\033[3;35m%}"
+set      cyanI="%{\033[3;36m%}"
+set     whiteI="%{\033[3;37m%}"
+## foreground underline font:
+set     blackU="%{\033[4;30m%}"
+set       redU="%{\033[4;31m%}"
+set     greenU="%{\033[4;32m%}"
+set    yellowU="%{\033[4;33m%}"
+set      blueU="%{\033[4;34m%}"
+set   magentaU="%{\033[4;35m%}"
+set      cyanU="%{\033[4;36m%}"
+set     whiteU="%{\033[4;37m%}"
+## background bold font:
+set    blackBB="%{\033[1;40m%}"
+set      redBB="%{\033[1;41m%}"
+set    greenBB="%{\033[1;42m%}"
+set   yellowBB="%{\033[1;43m%}"
+set     blueBB="%{\033[1;44m%}"
+set  magentaBB="%{\033[1;45m%}"
+set     cyanBB="%{\033[1;46m%}"
+set    whiteBB="%{\033[1;47m%}"
+# Shell Git-Trunk prompt:
+alias precmd 'set prompt="[ ${green}%n${end}${bold}@${end}${greenB}%m${end} | ${whiteI}%P|%D.%w.%Y${end} : ${magentaI}`$GIT_BRANCH_CMD`${end} ] ${cyanB}%~ ${end}%# "'
+
+
+#####################
+# Aliases
+#####################
+## Folders:
+alias home 'cd /home/asantos/'
+alias notes 'cd /home/asantos/Documents/Notes/'
+
+
+## GIT Dev trunk:
+alias trk 'cd /images/personal/dev/workspace/trunk'
+alias tools 'cd /images/personal/dev/workspace/tools'
+alias show 'cd /images/personal/dev/workspace/show'
+alias clrdev 'rm -rf -v /images/personal/dev/builds/*;rm -rf -v /images/personal/dev/modules/*'
+alias sandbox 'cd /data/pipeline/sandbox/${USER}'
+alias workspace 'cd /images/personal/dev/workspace'
+
+
+## Applications:
+alias pycharm 'startapp --dev trunk --ftrack-dev pycharm -m USE_MAYA:1 -m PYCHARM_ROOT://packages/vendor/jetbrains/pycharm-professional/linux_64 -m PYCHARM_VERSION:pycharm-professional'
+alias uvlayout_licenses '/packages/vendor/headus/cyslice/linux_64/uvlayout-pro-2.10.03/bin/hlmanager'
+alias chrome '~/programs/google-chrome/opt/google/chrome/chrome --no-sandbox'
+alias clobber 'cd /packages/vendor/TweakSoftware/cinesite_clobber_config'
+# FTrack/ATrack
+alias ftrack_action_hub 'unsetenv http_proxy; startapp python --dev trunk --dev-machine zulu -e PythonFtrack -e PythonExcelTools -m FTRACK_VERSION:ftrack-dev -m FTRACK_SERVER:http://ftrack-dev.cinesite.co.uk -m pyscript:actions/action_hub.py -- --use-dev-queue'
+alias ftrack_action_worker 'unsetenv http_proxy; startapp python --dev trunk --dev-machine zulu -e PythonFtrack -e PythonExcelTools -m FTRACK_VERSION:ftrack-dev -m FTRACK_SERVER:http://ftrack-dev.cinesite.co.uk -m pyscript:actions/action_worker.py -- --use-dev-queue --host_site montreal'
+alias atrack_action_hub 'unsetenv http_proxy; startapp python --dev trunk --dev-machine zulu -e PythonFtrack -e PythonExcelTools -m FTRACK_VERSION:atrack-dev -m FTRACK_SERVER:https://atrack-dev.mtl.ad.cinesite.com -m pyscript:actions/action_hub.py -- --use-dev-queue'
+alias atrack_action_worker 'unsetenv http_proxy; startapp python --dev trunk --dev-machine zulu -e PythonFtrack -e PythonExcelTools -m FTRACK_VERSION:atrack-dev -m FTRACK_SERVER:https://atrack-dev.mtl.ad.cinesite.com -m pyscript:actions/action_worker.py -- --use-dev-queue --host_site montreal'
+# Others
+alias vncpinto 'xfreerdp -g 1800x1100 -u mwojt@mtl.ad.cinesite.com pinto.mtl.ad.cinesite.com:3389'
+alias ociocheck '/packages/vendor/opencolorio.org/current/linux_64/bin/ociocheck'
+alias ociobakelut '/packages/vendor/opencolorio.org/current/linux_64/bin/ociobakelut'
+alias ffmpeg '/packages/vendor/ffmpeg.org/ffmpeg/linux_64/current/ffmpeg'
+alias ffprobe '/packages/vendor/ffmpeg.org/ffmpeg/linux_64/current/ffprobe'
+alias killnuke 'ps aux | grep -i Nuke | awk "{print $2}" | xargs kill -9'
+alias abcecho 'startapp exe -m CINESITE_PLATFORM:2.0 -m EXENAME:abcecho -- '
+alias vscode '/home/asantos/bin/VSCode-linux-x64/bin/code'
+## Environments:
+alias show ''
+alias sequence ''
+alias scene ''
+alias shot ''
+alias task ''
+alias rnd 'setenv SHOW RND ; setenv SCENE gen ; setenv SHOT gen ; setenv TASK pipe ; setenv TASK_ID a97f43d6-43c4-11ea-a8fe-ecf4bbcfac6c ; echo $SHOW $SCENE $SHOT $TASK $TASK_ID'
+alias noenv 'setenv SHOW ; setenv SCENE ; setenv SHOT ; setenv TASK'
+alias what_env 'echo $SHOW $SCENE $SHOT $TASK $TASK_ID'
+## Python shortcuts:
+alias test_python3 'startapp python -m pyscript:/home/asantos/Documents/Notes/test_python.py -m PYTHON_VERSION:3.10'
+alias test_python2 'startapp python -m pyscript:/home/asantos/Documents/Notes/test_python.py -m PYTHON_VERSION:2.7'
+
+
+##############
+# Git aliases
+##############
+alias g 'git'
+alias gs 'git status '
+alias ga 'git add '
+alias gb 'git branch '
+alias gbl 'git branch -l'
+alias gc 'git commit'
+alias go 'git checkout '
+alias gd 'git diff'
+alias gom 'git checkout master'
+alias gpm 'git push origin master'
+alias grm 'git rebase master'
+alias gl 'git log '
+alias gp 'git pull'
+alias gk 'gitk --all&'
+alias gg 'gitg --all'
+alias gpo 'git stash;git pull origin;git stash pop '
+
+
+
+
+
+
+
+
+—---------------------- BASH —------------------
+
+
+##############################
+# "Greetings/Welcome" script:
+##############################
+python /home/asantos/.greeting.py
+
+
+##################
+# Source scripts
+##################
+source ~/.git-completion.tcsh
+
+
+########################
+# DEV environment setup
+########################
+# https://confluence.mtl.ad.cinesite.com/display/PIP/Cross+Site+Workstations
+export APPSTARTER_DEV_ROOT=/images/personal/dev/modules
+export CSMM_DEV_ROOT=/images/personal/dev
+export CSMM_WORKSPACE_ROOT=/images/personal/dev/workspace
+export SHOW=RND
+
+
+#################
+# Custom Prompt
+#################
+# Colors!
+## Default color:
+# end='\e[0m'
+end=$(tput sgr0)
+## Default Bold color:
+bold='\e[1m'
+## foreground normal font (color palette 1 to 8):
+black='\e[30m'
+red='\e[31m'
+green='\e[32m'
+yellow='\e[33m'
+blue='\e[34m'
+magenta='\e[35m'
+cyan='\e[36m'
+white='\e[37m'
+## foreground bold font (color pallete 9 to 16):
+blackB='\e[1;30m'
+redB='\e[1;31m'
+greenB='\e[1;32m'
+yellowB='\e[1;33m'
+blueB='\e[1;34m'
+magentaB='\e[1;35m'
+cyanB='\e[1;36m'
+whiteB='\e[1;37m'
+## foreground italic font:
+blackI='\e[3;30m'
+redI='\e[3;31m'
+greenI='\e[3;32m'
+yellowI='\e[3;33m'
+blueI='\e[3;34m'
+magentaI='\e[3;35m'
+cyanI='\e[3;36m'
+whiteI='\e[3;37m'
+## foreground underline font:
+blackU='\e[4;30m'
+redU='\e[4;31m'
+greenU='\e[4;32m'
+yellowU='\e[4;33m'
+blueU='\e[4;34m'
+magentaU='\e[4;35m'
+cyanU='\e[4;36m'
+whiteU='\e[4;37m'
+## background bold font:
+blackBB='\e[1;40m'
+redBB='\e[1;41m'
+greenBB='\e[1;42m'
+yellowBB='\e[1;43m'
+blueBB='\e[1;44m'
+magentaBB='\e[1;45m'
+cyanBB='\e[1;46m'
+whiteBB='\e[1;47m'
+# Shell Git-Trunk prompt:
+export PS1="\[$whiteB\] [\[$blue\] \A \[$whiteB\] | \[$green\]\u\[$magenta\]@\[$yellow\]\h \[$whiteB\]] \[$cyan\]\w\[$end\] >> "
+
+
+#####################
+# Aliases
+#####################
+## Folders:
+alias home='cd /home/asantos/'
+alias notes='cd /home/asantos/Documents/Notes/'
+
+
+## GIT Dev trunk:
+alias trk='cd /images/personal/dev/workspace/trunk'
+alias tools='cd /images/personal/dev/workspace/tools'
+alias show='cd /images/personal/dev/workspace/show'
+alias clrdev='rm -rf -v /images/personal/dev/builds/*;rm -rf -v /images/personal/dev/modules/*'
+alias sandbox='cd /data/pipeline/sandbox/${USER}'
+alias workspace='cd /images/personal/dev/workspace'
+
+
+## Applications:
+alias pycharm='startapp --dev trunk --ftrack-dev pycharm -m USE_MAYA:1 -m PYCHARM_ROOT://packages/vendor/jetbrains/pycharm-professional/linux_64 -m PYCHARM_VERSION:pycharm-professional'
+alias uvlayout_licenses='/packages/vendor/headus/cyslice/linux_64/uvlayout-pro-2.10.03/bin/hlmanager'
+alias chrome='~/programs/google-chrome/opt/google/chrome/chrome --no-sandbox'
+alias clobber='cd /packages/vendor/TweakSoftware/cinesite_clobber_config'
+# FTrack/ATrack
+alias ftrack_action_hub='unsetenv http_proxy; startapp python --dev trunk --dev-machine zulu -e PythonFtrack -e PythonExcelTools -m FTRACK_VERSION:ftrack-dev -m FTRACK_SERVER:http://ftrack-dev.cinesite.co.uk -m pyscript:actions/action_hub.py -- --use-dev-queue'
+alias ftrack_action_worker='unsetenv http_proxy; startapp python --dev trunk --dev-machine zulu -e PythonFtrack -e PythonExcelTools -m FTRACK_VERSION:ftrack-dev -m FTRACK_SERVER:http://ftrack-dev.cinesite.co.uk -m pyscript:actions/action_worker.py -- --use-dev-queue --host_site montreal'
+alias atrack_action_hub='unsetenv http_proxy; startapp python --dev trunk --dev-machine zulu -e PythonFtrack -e PythonExcelTools -m FTRACK_VERSION:atrack-dev -m FTRACK_SERVER:https://atrack-dev.mtl.ad.cinesite.com -m pyscript:actions/action_hub.py -- --use-dev-queue'
+alias atrack_action_worker='unsetenv http_proxy; startapp python --dev trunk --dev-machine zulu -e PythonFtrack -e PythonExcelTools -m FTRACK_VERSION:atrack-dev -m FTRACK_SERVER:https://atrack-dev.mtl.ad.cinesite.com -m pyscript:actions/action_worker.py -- --use-dev-queue --host_site montreal'
+# Others
+alias vncpinto='xfreerdp -g 1800x1100 -u mwojt@mtl.ad.cinesite.com pinto.mtl.ad.cinesite.com:3389'
+alias ociocheck='/packages/vendor/opencolorio.org/current/linux_64/bin/ociocheck'
+alias ociobakelut='/packages/vendor/opencolorio.org/current/linux_64/bin/ociobakelut'
+alias ffmpeg='/packages/vendor/ffmpeg.org/ffmpeg/linux_64/current/ffmpeg'
+alias ffprobe='/packages/vendor/ffmpeg.org/ffmpeg/linux_64/current/ffprobe'
+alias killnuke='ps aux | grep -i Nuke | awk "{print $2}" | xargs kill -9'
+alias abcecho='startapp exe -m CINESITE_PLATFORM:2.0 -m EXENAME:abcecho -- '
+alias vscode='/home/asantos/bin/VSCode-linux-x64/bin/code'
+## Environments:
+alias show=''
+alias sequence=''
+alias scene=''
+alias shot=''
+alias task=''
+alias rnd='setenv SHOW RND ; setenv SCENE gen ; setenv SHOT gen ; setenv TASK pipe ; setenv TASK_ID a97f43d6-43c4-11ea-a8fe-ecf4bbcfac6c ; echo $SHOW $SCENE $SHOT $TASK $TASK_ID'
+alias noenv='setenv SHOW ; setenv SCENE ; setenv SHOT ; setenv TASK'
+alias what_env='echo $SHOW $SCENE $SHOT $TASK $TASK_ID'
+## Python shortcuts:
+alias test_python3='startapp python -m pyscript:/home/asantos/Documents/Notes/test_python.py -m PYTHON_VERSION:3.10'
+alias test_python2='startapp python -m pyscript:/home/asantos/Documents/Notes/test_python.py -m PYTHON_VERSION:2.7'
+
+
+##############
+# Git aliases
+##############
+alias g='git'
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gbl='git branch -l'
+alias gc='git commit'
+alias go='git checkout '
+alias gd='git diff'
+alias gom='git checkout master'
+alias gpm='git push origin master'
+alias grm='git rebase master'
+alias gl='git log '
+alias gp='git pull'
+alias gk='gitk --all&'
+alias gg='gitg --all'
+alias gpo='git stash;git pull origin;git stash pop '
