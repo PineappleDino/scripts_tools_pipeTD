@@ -1,13 +1,13 @@
 import logging
 import os
 
-from cs.config import config
-from cs.pipeline import User, Task
-from cs.pipeline.asset import Asset, AssetType
-from cs.pipeline.classes.asset_components import MeshCacheComponentInterface
-from cs.pipeline.classes.asset_versions import FXCacheAssetVersion
-from cs.utilities.workspace import get_workspace_path
-from csmaya.asset import io
+from <studio.config> import config
+from <studio.pipeline> import User, Task
+from <studio.pipeline.asset> import Asset, AssetType
+from <studio.pipeline.classes.asset_components> import <studio-filetype-for_meshes-interface>
+from <studio.pipeline.classes.asset_versions> import <studio-FXCache-Asset-Version>
+from <studio.utilities.workspace> import get_workspace_path
+from <studio-maya-api.asset> import io
 from maya import cmds
 from pymel import core as pm
 
@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 def create_meshcache_asset_version(
-        label, component_label=MeshCacheComponentInterface.DEFAULT_MESHCACHE_COMPONENT,
+        label, component_label=<studio-filetype-for_meshes-interface>.<DEFAULT_STUDIOFILETYPE_COMPONENT>,
         save_scene=True, user=None, task=None):
     ''' Creates a new FX Cache user version with the given label
     
@@ -33,7 +33,7 @@ def create_meshcache_asset_version(
     if not user:
         user = User()
     asset = Asset.make_from_task_label_type(task, label, AssetType('FX Cache'))
-    asset_version = FXCacheAssetVersion.make_version(asset, user, asset.get_next_user_version(), task)
+    asset_version = <studio-FXCache-Asset-Version>.make_version(asset, user, asset.get_next_user_version(), task)
     asset_version.add_master_scene_component('ma')
     if save_scene:
         io.save_current_scene(asset_version.master_scene_component)
@@ -50,7 +50,7 @@ def do_create_geometry_cache(time_range_mode=2, start_frame=1, end_frame=10, cac
     """
     Wrapper for command MEL script 'doCreateGeometryCache'. (Uses $version param as 6 for all new args)
     Script located in autodesk Maya's installation directory:
-        /packages/vendor/autodesk/maya/linux_64/[maya-version]/scripts/others/doCreateGeometryCache.mel
+        <location-softwares>/autodesk/maya/linux_64/[maya-version]/scripts/others/doCreateGeometryCache.mel
     example MEL command:
         doCreateGeometryCache 6 { "2", "1", "10", "OneFile", "1", "","0","","0", "add", "0", "1", "1","0","1","mcx","0" } ;
     Function in MEL script: global proc string[] doCreateGeometryCache( int $version, string $args[] )
