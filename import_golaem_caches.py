@@ -8,7 +8,7 @@ import shutil
 
 # Local Imports
 import launcher
-from toadin import dbio, fsio
+from <local_studio_api> import dbio, fsio
 
 # Maya imports
 from maya import cmds
