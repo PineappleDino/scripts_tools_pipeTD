@@ -1,5 +1,3 @@
-#Created by Alex Santos - Montreal
- 
 import pymel.core as pm
 import maya.cmds as cmds
 import maya
@@ -16,7 +14,6 @@ class ImageReference():
         return file_path
  
     def _getImageInfo(file_):
-        #picFile = Image.open("/job/pipeline/dev/sandbox/sandbox_adocoito/work/adocoito/maya/images/imageSeqexample/Total_Swimming02_reference_Reference_v002_main.1001.jpg")
         print file_
         picFile = Image.open(file_)
         print 'Format = {0};\n Size = {1};\n ColorMode = {2}'.format(picFile.format, picFile.size, picFile.mode)
