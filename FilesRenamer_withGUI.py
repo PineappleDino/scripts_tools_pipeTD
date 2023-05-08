@@ -4,8 +4,8 @@
 """ 
 ==============================================================
     
-    Base Code by: Pierre-Luc Seguin/Guillaume Arrieux
-    Qt GUI Interface and extra adjustments: Alex Santos
+    Rename Base Code by: Pierre-Luc Seguin/Guillaume Arrieux
+    Qt GUI Interface and extra adjustments: Alex Santos/PineappleDino
  
 ==============================================================
  
