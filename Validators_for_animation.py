@@ -1,6 +1,6 @@
 # Validators written for Animation Validation system/Sanity Checker, before exporting/publishing shots or assets
 
-class AnimationGeometryCacheValidator(AnimationValidator):
+class AnimationGeometryCacheValidator(<MainAnimationValidator>):
     """
     Validator to check if geometry cache is present on disk and in scene.
     Geometry Caches should be removed before publishing.
