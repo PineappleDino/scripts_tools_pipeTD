@@ -1,22 +1,5 @@
-# -*- coding: utf-8 -*-
 """
 Export template
-You can use the different variable available in exp inside this script
-
-Variables:
-    (str) self.store_path               (The path of the root store of the asset/shot)
-
-    To get the future file info:
-    (str) self.branch                   (A str of the current branch)
-    (str) self.task_name                (A str of the current task name)
-    (int) self.current_version          (A int representing the current version of the file)
-    (str) self.current_version_string   (A string representing the current version ex: 'v004')
-    (int) self.new_version              (A int representing the version ex: 5)
-    (str) self.new_version_string       (A string representing the version ex: 'v005')
-    (str) self.filename_schema          (The filename with [BRANCH], [VERSION] and [EXT] token missing)
-    (lst) self.publishedfile            (List of publishedfile dict associated with this package)
-
-    Any variables you create here are shared with EXP class
 """
 
 # Built-in Imports
@@ -24,9 +7,9 @@ import os
 
 # Local Imports
 import launcher
-from unitprocessor import console
-from configs import schema
-from toadin.context import Context
+from <studio.processor> import console
+from <studio.configs> import schema
+from <studio.database.context> import Context
 
 # Third-party Imports
 try:
@@ -40,7 +23,7 @@ TEMPLATE_TASKS = ['fx', 'fx-cloud']
 TEMPLATE_NAME = 'Export FX'
 TEMPLATE_SHORTNAME = 'Multi Export'
 TEMPLATE_TEXT = (
-    "BTFM FX export template:"
+    "FX export template:"
     "\n- Export VDBs/AiVolume shaders in .ma file format"
 )
 
@@ -232,10 +215,6 @@ def export(self):
                               widget.filepath,
                               launcher.get_user())
             count += 1
-
-    # Trigger rakete sync
-    # if int(self.project_id) == 287:
-    #     Context('Version', review_version['id']).update(self.db.sg, {'sg_sfs_sync_status_rakete': 'rdy'})
 
     # Clean up meta, set it back to `root` node (root is `fxcloud`)
     pm.parent('fxcloud|meta', world=True)
