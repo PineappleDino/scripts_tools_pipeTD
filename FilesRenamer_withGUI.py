@@ -1,15 +1,7 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-…
  
-""" 
-==============================================================
-    
-    Rename Base Code by: Pierre-Luc Seguin/Guillaume Arrieux
-    Qt GUI Interface and extra adjustments: Alex Santos/PineappleDino
- 
-==============================================================
- 
-"""
+
 import os, sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
