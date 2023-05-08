@@ -10,7 +10,7 @@ class AnimationGeometryCacheValidator(AnimationValidator):
         Validates if each slot about to be published, has geometry cache. If yes, the slot it's added to error list.
 
         :return: List of errors detected.
-        :rtype: list[cs.validate.ValidationError]
+        :rtype: list[<studio.validate>.ValidationError]
         """
         errors = []
         slots_with_cache = []
@@ -21,7 +21,7 @@ class AnimationGeometryCacheValidator(AnimationValidator):
         cache_nodes = return_geometry_cache_nodes(slots=self.bundle_slot_names)
         print(cache_nodes)
         if cache_nodes:
-            for slot in self.bundle_slot_names:
+            for slot in self.<studio-package-slot-names>:
                 if check_for_cache_files(slots=[slot]):
                     error_msg += "{0} \n".format(slot)
                     slots_with_cache.append(slot)
@@ -34,14 +34,14 @@ class AnimationGeometryCacheValidator(AnimationValidator):
         """
         Fixes the error, by removing the geometry cache of the slot in case.
 
-        :param cs.validate.ValidationError error: The flagged error
+        :param <studio.validate>.ValidationError error: The flagged error
         """
         slots_with_cache = error.error_data
         for slot in slots_with_cache:
             delete_cache_file(cache_name="{0}_face_rig_geometry_cache".format(slot))
 
 
-class CameraNameValidator(AnimationValidator):
+class CameraNameValidator(<MainAnimationValidator>):
     """
     Class for validating camera name.
     """
@@ -49,10 +49,10 @@ class CameraNameValidator(AnimationValidator):
         """
         Check if required camera is named correctly as
         camera once the namespace is removed.
-        :rtype: list[cs.validate.ValidationError]
+        :rtype: list[<studio.validate>.ValidationError]
         """
         errors = list()
-        for container in shot_bundle_container.ShotBundleContainer.find_all(publishable=True, skip_empty=True):
+        for container in <package_container.PackageContainerClass>.find_all(publishable=True, skip_empty=True):
             cameras = container.container_node.getChildren(allDescendents=True, type='camera')
             if len(cameras) == 1:
                 camera_trans_name = cameras[0].getParent().name()
@@ -70,7 +70,7 @@ class CameraNameValidator(AnimationValidator):
 		
 		
 		
-class NonReferencedGeometryValidator(AnimationValidator):
+class NonReferencedGeometryValidator(<MainAnimationValidator>):
     """
     Validates if there are non-referenced geometries under a referenced container
      different than NonReferencedNodesValidator, because it confirms the transform of the non-reference mesh in not
@@ -82,11 +82,8 @@ class NonReferencedGeometryValidator(AnimationValidator):
 
         meshes_to_fix = []
         for slot_name in self.slot_names:
-            container = shot_bundle_container.ShotBundleContainer.find_container(slot_name)
+            container = <package_container.PackageContainerClass>.find_container(slot_name)
             if not container:
-                continue
-
-            if container.avi and isinstance(container.avi.mode, (USDProxyBundleMode, UsdProxyMode)):
                 continue
 
             logger.info("Looking for non-referenced deformed meshes in scene".format(slot_name))
