@@ -1,17 +1,15 @@
 #!/usr/bin/env python
- 
-#=======SCRIPT CREATED BY ALEX PEDRO DO COITO SANTOS (adocoito)=========
- 
+
 import sys, os, shutil, argparse
-from plassetapi.session import Session
-from plassetapi.session.search import *
-from plassetapi.session.constants import *
+from <studio-asset-api>.session import Session
+from <studio-asset-api>.session.search import *
+from <studio-asset-api>.session.constants import *
 # ElementList imports
-import elementlist.asset
-from elementlist.editor.ui.elementlisteditorwidget import ElementListEditorWidget
-import pipeline.core.lib as pipeLib
-from plassetapi.ui.assetselectordialog import AssetSelectorDialog
-from atdscripts.qt.widgets import ShotPicker
+import <studio-element-lister-UI>.asset
+from <studio-element-lister-UI>.editor.ui.elementlisteditorwidget import ElementListEditorWidget
+import <studio-pipeline>.core.lib as pipeLib
+from <studio-asset-api>.ui.assetselectordialog import AssetSelectorDialog
+from <ATD-scripts-library.qt.widgets import ShotPicker
  
 try:
     from PySide2 import QtCore, QtGui, QtWidgets
@@ -533,22 +531,6 @@ class _noGUI:
             for y in animInst_list:
                 if y not in ele_list:
                     self.list_of_animInst_noEle.append(y)
- 
-            '''            
-            print 'Elements WITHOUT Animation Instances:'
-            if self.list_of_elements_noAnim == [] or self.list_of_elements_noAnim == None:
-                print '      None!'
-            else:
-                for ele_noanim in sorted(self.list_of_elements_noAnim):
-                    print '    {0}'.format(ele_noanim)
- 
-            print '\nElements WITH Animation Instances:'
-            if self.list_of_elements == [] or self.list_of_elements == None:
-                print '      None!'
-            else:
-                for ele in sorted(self.list_of_elements):
-                    print '    {0}'.format(ele)
-            '''
  
             print '_____________________________________________'
             print 'MISSING elements from the Element List:'
